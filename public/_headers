@@ -1,0 +1,10 @@
+# Hashed build output never changes under the same name
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Photo URLs carry ?v=<content hash>, so they can be cached for a long time too
+/photos/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
