@@ -1,0 +1,91 @@
+import { chromium } from 'playwright-core'
+import path from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
+
+const HERE = path.dirname(fileURLToPath(import.meta.url))
+const ROOT = path.resolve(HERE, '../..')
+const FILE = path.join(ROOT, 'cn-launch-ppt', 'Roomix-产品路演.html')
+const OUT = path.join(ROOT, 'cn-launch-ppt', 'html-preview')
+const URL = pathToFileURL(FILE).href
+const browser = await chromium.launch({ executablePath: 'C:/Program Files/Google/Chrome/Application/chrome.exe', headless: true })
+const errors = []
+const external = []
+async function openSlide(page, number) {
+  await page.locator('#overview-open').click()
+  await page.locator('.overview-item').nth(number - 1).click()
+  await page.waitForTimeout(600)
+  if (!await page.locator(`#slide-${number}`).evaluate(node => node.classList.contains('is-active'))) throw new Error(`Slide ${number} did not open`)
+}
+try {
+  const context = await browser.newContext({ viewport: { width: 1440, height: 810 }, deviceScaleFactor: 1 })
+  await context.setOffline(true)
+  const page = await context.newPage()
+  page.on('pageerror', error => errors.push(error.message))
+  page.on('request', request => { if (/^https?:/.test(request.url())) external.push(request.url()) })
+  await page.goto(URL)
+  await page.evaluate(() => document.fonts.ready)
+  await page.waitForTimeout(800)
+  if (await page.locator('.slide').count() !== 18) throw new Error('Expected 18 slides')
+  await page.screenshot({ path: path.join(OUT, 'deck-cover.png') })
+  for (let number = 2; number <= 18; number++) {
+    await page.locator('#next').click()
+    await page.waitForTimeout(80)
+    if (!await page.locator(`#slide-${number}`).evaluate(node => node.classList.contains('is-active'))) throw new Error(`Next failed at ${number}`)
+  }
+  if (!await page.locator('#next').isDisabled()) throw new Error('Next should be disabled on last slide')
+  await openSlide(page, 8)
+  await page.screenshot({ path: path.join(OUT, 'deck-flow.png') })
+  for (let i = 1; i < 4; i++) {
+    await page.locator(`[data-flow="${i}"]`).click()
+    await page.waitForTimeout(220)
+    if (await page.locator(`[data-flow="${i}"]`).getAttribute('aria-pressed') !== 'true') throw new Error(`Flow ${i} failed`)
+  }
+  await openSlide(page, 6)
+  await page.locator('[data-persona="zhou"]').click()
+  if (!await page.locator('[data-persona-panel="zhou"]').isVisible()) throw new Error('Persona switch failed')
+  await openSlide(page, 10)
+  await page.locator('#match-action').click()
+  await page.locator('#match-action').click()
+  if (await page.locator('#mutual-stage').getAttribute('data-state') !== '2') throw new Error('Mutual match failed')
+  await openSlide(page, 13)
+  await page.locator('[data-ia="me"]').click()
+  if (!await page.locator('[data-ia-column="me"]').evaluate(node => node.classList.contains('selected'))) throw new Error('IA switch failed')
+  await openSlide(page, 14)
+  await page.locator('[data-disclosure="area"]').click()
+  if (await page.locator('#profile-company').textContent() !== '深圳 · 南山') throw new Error('Disclosure switch failed')
+  const headerLeft = await page.locator('#deck-header').evaluate(node => Math.round(node.getBoundingClientRect().left))
+  if (headerLeft !== 64) throw new Error(`Deck shifted horizontally: ${headerLeft}`)
+  await page.screenshot({ path: path.join(OUT, 'deck-verification.png') })
+  await openSlide(page, 8)
+  await page.locator('#autoplay').click()
+  await page.waitForTimeout(9300)
+  if (!await page.locator('#slide-9').evaluate(node => node.classList.contains('is-active'))) throw new Error('Autoplay failed')
+  await page.locator('#autoplay').click()
+  await page.locator('#fullscreen').click()
+  if (!await page.evaluate(() => Boolean(document.fullscreenElement))) throw new Error('Fullscreen failed')
+  await page.locator('#fullscreen').click()
+  await openSlide(page, 18)
+  await page.getByRole('button', { name: '查看产品流程' }).click()
+  if (!await page.locator('#slide-8').evaluate(node => node.classList.contains('is-active'))) throw new Error('Closing action failed')
+  const imagesReady = await page.evaluate(() => [...document.images].every(image => image.complete && image.naturalWidth > 0))
+  if (!imagesReady) throw new Error('Embedded images failed')
+  await context.close()
+
+  const mobile = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 1, isMobile: true, hasTouch: true, reducedMotion: 'reduce' })
+  await mobile.setOffline(true)
+  const phone = await mobile.newPage()
+  phone.on('pageerror', error => errors.push(error.message))
+  await phone.goto(URL + '#1')
+  await phone.locator('#next').tap()
+  if (!await phone.locator('#slide-2').evaluate(node => node.classList.contains('is-active'))) throw new Error('Mobile next failed')
+  await phone.locator('#viewport').dispatchEvent('pointerdown', { pointerType: 'touch', clientX: 320, clientY: 400 })
+  await phone.locator('#viewport').dispatchEvent('pointerup', { pointerType: 'touch', clientX: 60, clientY: 405 })
+  if (!await phone.locator('#slide-3').evaluate(node => node.classList.contains('is-active'))) throw new Error('Touch swipe failed')
+  if (await phone.evaluate(() => document.documentElement.scrollWidth) !== 390) throw new Error('Mobile overflow')
+  await mobile.close()
+  if (errors.length) throw new Error(errors.join('\n'))
+  if (external.length) throw new Error(`External requests: ${external.join(', ')}`)
+  console.log('DECK_OK 18 slides, offline, overview, next, flow, personas, match, IA, disclosure, autoplay, fullscreen, mobile tap/swipe')
+} finally {
+  await browser.close()
+}

@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8f4ed">
+  <title>Roomix 封面视觉方向 A / B</title>
+  <style>
+    @font-face{font-family:Roomix Sans;src:url(data:font/woff2;base64,@@FONT_SANS@@) format('woff2');font-weight:100 900;font-display:swap}
+    @font-face{font-family:Roomix Serif;src:url(data:font/woff2;base64,@@FONT_SERIF@@) format('woff2');font-weight:100 900;font-display:swap}
+    :root{--paper:#f8f4ed;--ink:#20262d;--muted:#77756f;--coral:#ff526d;--orange:#ff9a3d;--line:rgba(32,38,45,.13);--scale:1}
+    *{box-sizing:border-box}
+    html,body{width:100%;height:100%;margin:0;overflow:hidden}
+    body{font-family:Roomix Sans,PingFang SC,Hiragino Sans GB,sans-serif;color:var(--ink);background:#e8e2da;-webkit-font-smoothing:antialiased}
+    button{font:inherit}
+    button:focus-visible{outline:3px solid #20262d;outline-offset:4px}
+    [hidden]{display:none!important}
+    #viewport{position:fixed;inset:0;overflow:hidden;touch-action:pan-y;user-select:none}
+    .stage{position:absolute;left:50%;top:50%;width:1440px;height:810px;overflow:hidden;transform:translate(-50%,-50%) scale(var(--scale));transform-origin:center;box-shadow:0 30px 90px rgba(48,36,28,.16)}
+    .concept{position:absolute;inset:0;overflow:hidden}
+    .brand{display:flex;align-items:center;gap:12px;font-size:25px;font-weight:760;letter-spacing:-1px}
+    .brand-mark{width:37px;height:37px;padding:8px;border-radius:12px;background:linear-gradient(135deg,var(--coral),var(--orange));color:#fff;box-shadow:0 8px 22px rgba(255,82,109,.2)}
+    .brand-mark svg{display:block;width:100%;height:100%;fill:currentColor}
+    .micro{font-size:12px;font-weight:650;letter-spacing:2.1px;text-transform:uppercase}
+    .pill{display:inline-flex;align-items:center;gap:8px;width:max-content;padding:9px 14px;border:1px solid var(--line);border-radius:999px;font-size:12px;font-weight:600;letter-spacing:.5px}
+    .pill-dot{width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,var(--coral),var(--orange))}
+    .phone{position:absolute;padding:6px;border-radius:37px;background:#24282d;box-shadow:0 35px 70px rgba(62,39,29,.25),0 4px 12px rgba(31,25,22,.15)}
+    .phone:before{content:"";position:absolute;z-index:2;left:50%;top:12px;width:28%;height:17px;border-radius:20px;background:#24282d;transform:translateX(-50%)}
+    .phone img{display:block;width:100%;height:100%;border-radius:31px;object-fit:cover}
+    .switcher{position:fixed;z-index:20;left:50%;bottom:max(18px,env(safe-area-inset-bottom));display:flex;gap:5px;padding:5px;border:1px solid rgba(255,255,255,.7);border-radius:18px;background:rgba(30,32,34,.82);box-shadow:0 12px 36px rgba(22,20,19,.25);backdrop-filter:blur(18px);transform:translateX(-50%)}
+    .switcher button{min-width:142px;padding:11px 16px;border:0;border-radius:13px;color:rgba(255,255,255,.66);background:transparent;cursor:pointer;font-size:13px;font-weight:650;transition:background .2s,color .2s,transform .2s}
+    .switcher button:hover{color:#fff}
+    .switcher button:active{transform:scale(.97)}
+    .switcher button[aria-pressed=true]{color:#20262d;background:#fffdf8;box-shadow:0 4px 12px rgba(0,0,0,.12)}
+    .key-hint{position:fixed;z-index:20;right:20px;bottom:25px;color:rgba(255,255,255,.75);font-size:11px;letter-spacing:.5px;text-shadow:0 1px 8px rgba(0,0,0,.25)}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;border:0}
+    .rotate-hint{display:none}
+
+    /* A — warm editorial */
+    .concept-a{background:var(--paper)}
+    .concept-a:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 8% 90%,rgba(255,154,61,.08),transparent 32%),linear-gradient(90deg,transparent 49.95%,rgba(32,38,45,.055) 50%,transparent 50.05%);pointer-events:none}
+    .a-header{position:absolute;left:70px;right:70px;top:48px;display:flex;align-items:center;justify-content:space-between}
+    .a-header-right{display:flex;align-items:center;gap:24px;color:#6f6e68}
+    .a-header-line{width:54px;height:1px;background:#aaa59c}
+    .a-copy{position:absolute;z-index:3;left:70px;top:186px;width:720px}
+    .a-kicker{display:flex;align-items:center;gap:12px;margin-bottom:28px;color:#8b5a4c}
+    .a-kicker:before{content:"";width:28px;height:2px;background:linear-gradient(90deg,var(--coral),var(--orange))}
+    .a-title{margin:0;font-size:72px;font-weight:570;line-height:1.2;letter-spacing:-4px}
+    .a-title .accent{font-family:Roomix Serif,Songti SC,serif;font-weight:620;background:linear-gradient(105deg,#ef4767,#ef7f38);-webkit-background-clip:text;background-clip:text;color:transparent}
+    .a-title .second{display:block;margin-top:6px}
+    .a-subtitle{margin:30px 0 0;color:#6d6c67;font-size:18px;line-height:1.8;letter-spacing:.4px}
+    .a-meta{position:absolute;left:70px;bottom:76px;display:flex;align-items:center;gap:28px;color:#77746e}
+    .a-meta strong{color:#2c3035;font-weight:650}
+    .a-meta-divider{width:1px;height:30px;background:var(--line)}
+    .a-index{position:absolute;right:70px;bottom:26px;color:#a29d94;font-family:Georgia,serif;font-size:13px;font-style:italic}
+    .a-visual{position:absolute;right:64px;top:116px;width:570px;height:630px}
+    .a-arch{position:absolute;right:0;top:0;width:478px;height:610px;border-radius:240px 240px 34px 34px;background:linear-gradient(155deg,#ffbc93 0%,#ff8c78 42%,#fa6479 100%);box-shadow:inset 0 1px rgba(255,255,255,.5)}
+    .a-arch:after{content:"";position:absolute;inset:18px;border:1px solid rgba(255,255,255,.35);border-radius:220px 220px 25px 25px}
+    .a-phone{z-index:2;right:81px;top:55px;width:250px;height:541px;transform:rotate(3deg);animation:aPhone .9s cubic-bezier(.2,.8,.2,1) both}
+    .a-room{position:absolute;z-index:4;left:-12px;bottom:17px;width:224px;height:154px;padding:7px;border-radius:20px;background:#fffdf9;box-shadow:0 24px 50px rgba(66,42,31,.2);transform:rotate(-5deg);animation:rise .8s .25s cubic-bezier(.2,.8,.2,1) both}
+    .a-room img{width:100%;height:100%;border-radius:14px;object-fit:cover}
+    .a-room span{position:absolute;left:18px;bottom:17px;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,.9);font-size:10px;font-weight:650;box-shadow:0 4px 12px rgba(0,0,0,.08)}
+    .a-match{position:absolute;z-index:5;right:-8px;top:180px;width:158px;padding:15px 16px;border:1px solid rgba(255,255,255,.75);border-radius:20px;background:rgba(255,253,248,.9);box-shadow:0 18px 40px rgba(90,45,42,.14);backdrop-filter:blur(14px);animation:rise .8s .4s cubic-bezier(.2,.8,.2,1) both}
+    .a-match-top{display:flex;align-items:center;justify-content:space-between;color:#77736d;font-size:10px}
+    .a-match-score{margin-top:4px;font-family:Georgia,serif;font-size:42px;line-height:1;color:#f0576d}
+    .a-match-score small{font-family:Roomix Sans,sans-serif;font-size:13px}
+    .a-match p{margin:7px 0 0;font-size:11px;font-weight:600}
+    .a-stamp{position:absolute;left:23px;top:84px;display:grid;place-items:center;width:82px;height:82px;border:1px solid rgba(255,255,255,.7);border-radius:50%;color:#fff;font-family:Georgia,serif;font-size:12px;font-style:italic;line-height:1.35;text-align:center;transform:rotate(-12deg)}
+
+    /* B — coral product theatre */
+    .concept-b{background:radial-gradient(circle at 75% 15%,rgba(255,255,255,.9),transparent 28%),radial-gradient(circle at 8% 90%,rgba(255,139,107,.32),transparent 36%),linear-gradient(135deg,#ffe8d9 0%,#ffd2c2 48%,#ffb8b1 100%)}
+    .concept-b:before{content:"roomix";position:absolute;left:42px;top:-77px;color:rgba(255,255,255,.38);font-size:248px;font-weight:850;letter-spacing:-19px;line-height:1}
+    .concept-b:after{content:"";position:absolute;right:-140px;bottom:-260px;width:650px;height:650px;border:1px solid rgba(255,255,255,.45);border-radius:50%;box-shadow:0 0 0 70px rgba(255,255,255,.07),0 0 0 140px rgba(255,255,255,.05)}
+    .b-header{position:absolute;z-index:6;left:60px;right:60px;top:43px;display:flex;align-items:center;justify-content:space-between}
+    .b-header .brand-mark{background:rgba(255,255,255,.85);color:#f45b6f;box-shadow:0 8px 25px rgba(150,67,62,.1)}
+    .b-header-right{display:flex;align-items:center;gap:14px}
+    .b-header-right .pill{border-color:rgba(103,57,51,.16);background:rgba(255,255,255,.24);color:#794c47}
+    .b-edition{padding:10px 2px;color:#8f5e56;font-size:11px;letter-spacing:1.5px}
+    .b-canvas{position:absolute;z-index:2;inset:117px 54px 50px;border:1px solid rgba(255,255,255,.54);border-radius:42px;background:rgba(255,255,255,.15);box-shadow:inset 0 1px rgba(255,255,255,.45);overflow:hidden}
+    .b-canvas:before{content:"";position:absolute;left:57px;top:48px;width:90px;height:1px;background:rgba(103,57,51,.25)}
+    .b-copy{position:absolute;z-index:7;left:110px;top:218px;width:570px}
+    .b-kicker{display:flex;align-items:center;gap:11px;color:#9b5f55}
+    .b-kicker .line{width:30px;height:1px;background:#b77b6d}
+    .b-title{margin:28px 0 0;font-size:98px;font-weight:690;line-height:1.03;letter-spacing:-7px}
+    .b-title span{display:block}
+    .b-title .outline{color:transparent;-webkit-text-stroke:1.5px #343237}
+    .b-tagline{margin:28px 0 0;max-width:470px;color:#74534d;font-size:18px;line-height:1.75}
+    .b-bottom{position:absolute;z-index:7;left:110px;bottom:91px;display:flex;align-items:center;gap:14px}
+    .b-bottom-label{padding:11px 17px;border-radius:999px;background:#272a2e;color:#fff;font-size:12px;font-weight:600;box-shadow:0 10px 24px rgba(68,43,38,.15)}
+    .b-bottom-note{color:#8b625a;font-size:11px;letter-spacing:.7px}
+    .b-halo{position:absolute;right:176px;top:22px;width:550px;height:550px;border-radius:50%;background:linear-gradient(145deg,rgba(255,255,255,.75),rgba(255,255,255,.12));box-shadow:inset 0 0 70px rgba(255,255,255,.45)}
+    .b-phone-main{right:265px;top:25px;width:236px;height:510px;transform:rotate(3deg);animation:bMain .85s cubic-bezier(.2,.8,.2,1) both}
+    .b-phone-left{right:485px;top:113px;width:176px;height:381px;transform:rotate(-9deg);box-shadow:0 28px 55px rgba(96,48,42,.18);animation:bLeft .9s .12s cubic-bezier(.2,.8,.2,1) both}
+    .b-phone-right{right:60px;top:100px;width:183px;height:396px;transform:rotate(10deg);box-shadow:0 28px 55px rgba(96,48,42,.18);animation:bRight .9s .2s cubic-bezier(.2,.8,.2,1) both}
+    .b-phone-left:before,.b-phone-right:before{height:13px;top:10px}
+    .b-match{position:absolute;z-index:8;right:124px;bottom:54px;display:flex;align-items:center;gap:13px;width:258px;padding:15px 17px;border:1px solid rgba(255,255,255,.8);border-radius:22px;background:rgba(255,255,255,.86);box-shadow:0 20px 45px rgba(99,49,44,.17);backdrop-filter:blur(16px);animation:rise .8s .4s cubic-bezier(.2,.8,.2,1) both}
+    .b-avatars{display:flex;padding-left:8px}
+    .b-avatars img{width:39px;height:39px;border:3px solid #fff;border-radius:50%;object-fit:cover;margin-left:-8px}
+    .b-match strong{display:block;font-size:13px}
+    .b-match span{display:block;margin-top:3px;color:#9a6d64;font-size:10px}
+    .b-match-dot{margin-left:auto;width:9px;height:9px;border-radius:50%;background:#ff6175;box-shadow:0 0 0 5px rgba(255,97,117,.12)}
+    .b-side-note{position:absolute;z-index:5;right:28px;top:142px;color:rgba(127,78,69,.65);font-family:Georgia,serif;font-size:12px;font-style:italic;writing-mode:vertical-rl;letter-spacing:1px}
+    .b-page{position:absolute;z-index:5;left:60px;bottom:25px;color:rgba(118,71,64,.58);font-size:10px;letter-spacing:1.5px}
+    .b-year{position:absolute;z-index:5;right:60px;bottom:25px;color:rgba(118,71,64,.58);font-family:Georgia,serif;font-size:12px;font-style:italic}
+
+    @keyframes rise{from{opacity:0;translate:0 18px}to{opacity:1;translate:0 0}}
+    @keyframes aPhone{from{opacity:0;transform:translateY(28px) rotate(6deg)}to{opacity:1;transform:translateY(0) rotate(3deg)}}
+    @keyframes bMain{from{opacity:0;transform:translateY(35px) rotate(7deg)}to{opacity:1;transform:translateY(0) rotate(3deg)}}
+    @keyframes bLeft{from{opacity:0;transform:translateY(40px) rotate(-13deg)}to{opacity:1;transform:translateY(0) rotate(-9deg)}}
+    @keyframes bRight{from{opacity:0;transform:translateY(40px) rotate(14deg)}to{opacity:1;transform:translateY(0) rotate(10deg)}}
+    @media(max-width:700px){.switcher button{min-width:116px;padding:10px 12px;font-size:12px}.key-hint{display:none}}
+    @media(max-width:700px) and (orientation:portrait){.rotate-hint{position:fixed;z-index:19;left:50%;top:18px;display:block;padding:8px 12px;border-radius:999px;background:rgba(32,38,45,.72);color:#fff;font-size:11px;transform:translateX(-50%);white-space:nowrap}}
+    @media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+  </style>
+</head>
+<body data-concept="a">
+  <svg width="0" height="0" aria-hidden="true" style="position:absolute">
+    <defs>
+      <symbol id="roomix-mark" viewBox="0 0 24 24">
+        <path fill-rule="evenodd" d="M10.6 2.55a2.3 2.3 0 0 1 2.8 0l7.2 5.6c.56.44.9 1.12.9 1.83v9.27A2.75 2.75 0 0 1 18.75 22H5.25A2.75 2.75 0 0 1 2.5 19.25V9.98c0-.71.34-1.39.9-1.83l7.2-5.6ZM12 18.7c.2 0 4.6-2.7 4.6-5.8a2.45 2.45 0 0 0-4.6-1.2 2.45 2.45 0 0 0-4.6 1.2c0 3.1 4.4 5.8 4.6 5.8Z"/>
+      </symbol>
+    </defs>
+  </svg>
+  <div id="viewport">
+    <div class="stage" id="stage">
+      <section class="concept concept-a" id="concept-a" aria-label="方向 A：暖白杂志">
+        <header class="a-header">
+          <div class="brand">
+            <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#roomix-mark"/></svg></span>
+            <span>roomix</span>
+          </div>
+          <div class="a-header-right micro">
+            <span>Product presentation</span>
+            <span class="a-header-line" aria-hidden="true"></span>
+            <span>CN · 2026</span>
+          </div>
+        </header>
+        <div class="a-copy">
+          <div class="a-kicker micro">Hong Kong demo → Chinese mainland</div>
+          <h1 class="a-title">先滑到<span class="accent">一个室友</span>，<span class="second">再一起滑到一间房。</span></h1>
+          <p class="a-subtitle">Roomix 中国大陆上线前产品路演<br>从生活契合，到共同找房，再到可信连接。</p>
+        </div>
+        <div class="a-visual" aria-label="Roomix 真实产品界面与房源照片">
+          <div class="a-arch" aria-hidden="true"></div>
+          <div class="a-stamp" aria-hidden="true">people first<br>then places</div>
+          <div class="phone a-phone"><img src="@@IMG_KAYLEE@@" alt="Roomix 室友匹配真实界面"></div>
+          <div class="a-room"><img src="@@PHOTO_LIVING@@" alt="明亮的合租客厅"><span>一起喜欢，才去看房</span></div>
+          <div class="a-match">
+            <div class="a-match-top"><span>生活契合度</span><span>01 / 10</span></div>
+            <div class="a-match-score">92<small>%</small></div>
+            <p>你们都喜欢早睡与整洁</p>
+          </div>
+        </div>
+        <footer class="a-meta">
+          <div><strong>18 页产品叙事</strong><br><span class="micro">Market · Research · Design</span></div>
+          <span class="a-meta-divider" aria-hidden="true"></span>
+          <span>明亮、简约，让产品自己说话。</span>
+        </footer>
+        <div class="a-index">Cover / 01</div>
+      </section>
+      <section class="concept concept-b" id="concept-b" aria-label="方向 B：珊瑚产品剧场" hidden>
+        <header class="b-header">
+          <div class="brand">
+            <span class="brand-mark"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="#roomix-mark"/></svg></span>
+            <span>roomix</span>
+          </div>
+          <div class="b-header-right">
+            <span class="pill"><span class="pill-dot" aria-hidden="true"></span>中国大陆上线前产品路演</span>
+            <span class="b-edition">2026 / PRODUCT DECK</span>
+          </div>
+        </header>
+        <div class="b-canvas">
+          <div class="b-halo" aria-hidden="true"></div>
+          <div class="phone b-phone-left"><img src="@@IMG_QUIZ@@" alt="Roomix 生活习惯测评界面"></div>
+          <div class="phone b-phone-main"><img src="@@IMG_KAYLEE@@" alt="Roomix 室友卡片真实界面"></div>
+          <div class="phone b-phone-right"><img src="@@IMG_MATCH@@" alt="Roomix 双向匹配成功界面"></div>
+          <div class="b-match">
+            <div class="b-avatars" aria-hidden="true"><img src="@@PHOTO_ME@@" alt=""><img src="@@PHOTO_KAYLEE@@" alt=""></div>
+            <div><strong>双向喜欢，开始一起刷房</strong><span>A match made for living.</span></div>
+            <span class="b-match-dot" aria-hidden="true"></span>
+          </div>
+        </div>
+        <div class="b-copy">
+          <div class="b-kicker micro"><span class="line" aria-hidden="true"></span>Roommate first. Room second.</div>
+          <h1 class="b-title"><span>从合拍，</span><span class="outline">到合住。</span></h1>
+          <p class="b-tagline">先滑到一个室友，再一起滑到一间房。<br>让找室友，成为一次值得期待的认识。</p>
+        </div>
+        <div class="b-bottom"><span class="b-bottom-label">18 页 · 产品 / 用户 / 设计</span><span class="b-bottom-note">HONG KONG → CHINESE MAINLAND</span></div>
+        <div class="b-side-note" aria-hidden="true">A better shared life starts here</div>
+        <div class="b-page">01 — COVER</div>
+        <div class="b-year">Roomix, 2026</div>
+      </section>
+    </div>
+  </div>
+  <div class="switcher" role="group" aria-label="选择封面视觉方向">
+    <button type="button" data-switch="a" aria-pressed="true">A · 暖白杂志</button>
+    <button type="button" data-switch="b" aria-pressed="false">B · 产品剧场</button>
+  </div>
+  <div class="rotate-hint">横屏观看，细节更清晰</div>
+  <div class="sr-only" id="announcer" aria-live="polite"></div>
+  <script>
+    (() => {
+      const stage = document.getElementById('stage')
+      const concepts = { a: document.getElementById('concept-a'), b: document.getElementById('concept-b') }
+      const buttons = [...document.querySelectorAll('[data-switch]')]
+      const announcer = document.getElementById('announcer')
+      let current = 'a'
+      let startX = 0
+      let startY = 0
+      function fit() {
+        const scale = Math.min(window.innerWidth / 1440, window.innerHeight / 810)
+        stage.style.setProperty('--scale', String(scale))
+      }
+      function show(name) {
+        if (!concepts[name]) return
+        current = name
+        document.body.dataset.concept = name
+        Object.entries(concepts).forEach(([key, node]) => { node.hidden = key !== name })
+        buttons.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.switch === name)))
+        announcer.textContent = name === 'a' ? '方向 A，暖白杂志' : '方向 B，珊瑚产品剧场'
+        history.replaceState(null, '', '#' + name)
+      }
+      buttons.forEach(button => button.addEventListener('click', () => show(button.dataset.switch)))
+      window.addEventListener('keydown', event => {
+        if (event.altKey || event.ctrlKey || event.metaKey) return
+        if (event.key === '1') show('a')
+        if (event.key === '2') show('b')
+        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') show(current === 'a' ? 'b' : 'a')
+      })
+      document.getElementById('viewport').addEventListener('pointerdown', event => {
+        if (event.pointerType === 'mouse') return
+        startX = event.clientX
+        startY = event.clientY
+      })
+      document.getElementById('viewport').addEventListener('pointerup', event => {
+        if (event.pointerType === 'mouse') return
+        const dx = event.clientX - startX
+        const dy = event.clientY - startY
+        if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy) * 1.2) show(current === 'a' ? 'b' : 'a')
+      })
+      window.addEventListener('resize', fit)
+      fit()
+      show(location.hash === '#b' ? 'b' : 'a')
+    })()
+  </script>
+</body>
+</html>

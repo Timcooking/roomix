@@ -1,0 +1,312 @@
+{
+  "meta": {
+    "title": "Roomix 中国大陆上线前产品路演",
+    "theme": "A · 暖白杂志",
+    "slideCount": 18
+  },
+  "slides": [
+    {
+      "id": 1,
+      "section": "封面",
+      "layout": "cover",
+      "eyebrow": "HONG KONG DEMO → CHINESE MAINLAND",
+      "title": "先滑到一个室友，\n再一起滑到一间房。",
+      "accent": "一个室友",
+      "subtitle": "Roomix 中国大陆上线前产品路演",
+      "edition": "CN · 2026",
+      "assets": ["kaylee", "living"]
+    },
+    {
+      "id": 2,
+      "section": "项目背景",
+      "layout": "market",
+      "eyebrow": "01 / MARKET",
+      "title": "近 2.6 亿租房人口",
+      "metrics": [
+        {"value": "2.6 亿", "label": "全国租房人口"},
+        {"value": "4000 万", "label": "四大一线城市租房人口"},
+        {"value": "1270 万", "label": "2026 届高校毕业生"}
+      ],
+      "info": "来源：58 安居客研究院《2025 中国城市长租市场发展蓝皮书》（新华网 2025-07-28）；中新社（2025-04-02）；教育部（2025-11-21）。"
+    },
+    {
+      "id": 3,
+      "section": "项目背景",
+      "layout": "trends",
+      "eyebrow": "02 / TRENDS",
+      "title": "租住决策，正在变慢、变长",
+      "metrics": [
+        {"value": "29.7 岁", "label": "在租客户平均年龄", "change": "27.2 → 29.7"},
+        {"value": "18.8 天", "label": "平均决策周期", "change": "9.9 → 18.8"},
+        {"value": "63.4%", "label": "续租率", "change": "47.4% → 63.4%"}
+      ],
+      "policy": [
+        {"date": "2025.06.01", "label": "人脸识别技术应用安全管理办法"},
+        {"date": "2025.09.15", "label": "住房租赁条例"}
+      ],
+      "info": "趋势来源：《中国青年租住报告》2026-10-08，泊寓约 150 万在租客户面板，2019—2026H1；单一品牌样本，外推需谨慎。"
+    },
+    {
+      "id": 4,
+      "section": "调研分析",
+      "layout": "research",
+      "eyebrow": "03 / RESEARCH",
+      "title": "100 份问卷，5 位深访",
+      "badge": "模拟样本",
+      "cities": [
+        {"label": "上海", "value": 25},
+        {"label": "深圳", "value": 25},
+        {"label": "杭州", "value": 20},
+        {"label": "北京", "value": 15},
+        {"label": "成都", "value": 15}
+      ],
+      "ages": [
+        {"label": "22–25 岁", "value": 39},
+        {"label": "26–29 岁", "value": 30},
+        {"label": "30–35 岁", "value": 31}
+      ],
+      "pains": [
+        {"label": "虚假房源", "value": 62},
+        {"label": "生活习惯", "value": 62},
+        {"label": "身份不实", "value": 53},
+        {"label": "押金费用", "value": 53},
+        {"label": "安全隐私", "value": 48},
+        {"label": "共同决策", "value": 41}
+      ],
+      "info": "15 题问卷、5 位合成深访；固定随机种子生成，仅用于设计验证，非真实回收或真实访谈。"
+    },
+    {
+      "id": 5,
+      "section": "调研分析",
+      "layout": "trust",
+      "eyebrow": "04 / TRUST & PRIVACY",
+      "title": "实名核验 82%，完整公开仅 14%",
+      "badge": "模拟样本",
+      "certifications": [
+        {"label": "实名", "value": 82},
+        {"label": "房源", "value": 81},
+        {"label": "真人", "value": 63},
+        {"label": "职业", "value": 62},
+        {"label": "学历", "value": 47}
+      ],
+      "privacy": [
+        {"label": "仅徽章", "value": 51},
+        {"label": "城市 / 园区", "value": 26},
+        {"label": "完整单位", "value": 14},
+        {"label": "不认证", "value": 9}
+      ],
+      "highlight": {"value": 77, "label": "有限公开"},
+      "faceAlternative": 43,
+      "info": "信任题多选；公开粒度单选。人脸认证中，43% 需要说明与非人脸替代路径。"
+    },
+    {
+      "id": 6,
+      "section": "调研分析",
+      "layout": "personas",
+      "eyebrow": "05 / PERSONAS",
+      "title": "三类典型合租决策者",
+      "badge": "合成画像",
+      "personas": [
+        {
+          "id": "lin",
+          "name": "林悦",
+          "age": 25,
+          "city": "上海",
+          "role": "品牌运营",
+          "budget": "¥4,500",
+          "commute": "≤40 分钟",
+          "priority": "安静 · 整洁",
+          "quote": "先知道怎么生活，再决定住哪里。"
+        },
+        {
+          "id": "chen",
+          "name": "陈昊",
+          "age": 28,
+          "city": "深圳",
+          "role": "产品经理",
+          "budget": "¥4,000",
+          "commute": "南山区",
+          "priority": "实名 · 职业徽章",
+          "quote": "公司可以不公开，身份必须可信。"
+        },
+        {
+          "id": "zhou",
+          "name": "周雨桐",
+          "age": 23,
+          "city": "杭州",
+          "role": "应届硕士",
+          "budget": "¥2,800",
+          "commute": "地铁沿线",
+          "priority": "学历 · 同性偏好",
+          "quote": "第一次合租，不想只靠运气。"
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "section": "竞品分析",
+      "layout": "competition",
+      "eyebrow": "06 / COMPETITION",
+      "title": "生活匹配 × 找房闭环",
+      "axes": {"x": "生活匹配", "y": "找房闭环"},
+      "competitors": [
+        {"name": "Roomix", "x": 88, "y": 90, "featured": true},
+        {"name": "Roomi", "x": 70, "y": 35},
+        {"name": "CoHabby", "x": 72, "y": 18},
+        {"name": "Wellcee", "x": 45, "y": 45},
+        {"name": "贝壳 / 自如", "x": 18, "y": 92},
+        {"name": "豆瓣 / 小红书", "x": 32, "y": 20}
+      ],
+      "info": "基于公开功能与本次产品体验的定性定位，不表示市场份额或产品评分。"
+    },
+    {
+      "id": 8,
+      "section": "功能设计",
+      "layout": "flow",
+      "eyebrow": "07 / PRODUCT FLOW",
+      "title": "从测评到看房的四步链路",
+      "steps": [
+        {"label": "10 题测评", "asset": "quiz"},
+        {"label": "双向匹配", "asset": "match"},
+        {"label": "共享卡组", "asset": "rooms"},
+        {"label": "预约看房", "asset": "roomMatch"}
+      ]
+    },
+    {
+      "id": 9,
+      "section": "功能设计",
+      "layout": "algorithm",
+      "eyebrow": "08 / COMPATIBILITY",
+      "title": "契合度由 10 项生活习惯构成",
+      "score": 92,
+      "weights": [
+        {"label": "作息", "value": 1.4},
+        {"label": "整洁", "value": 1.4},
+        {"label": "吸烟", "value": 1.3},
+        {"label": "预算", "value": 1.3},
+        {"label": "宠物", "value": 1.2},
+        {"label": "区域", "value": 1.2}
+      ],
+      "features": ["可解释", "双向", "进入房源决策"],
+      "asset": "detail",
+      "info": "当前 Demo 算法：相同记 1，接近记 0.55，不同记 0；按题目权重归一化后映射至 52–98 分。"
+    },
+    {
+      "id": 10,
+      "section": "功能设计",
+      "layout": "mutual",
+      "eyebrow": "09 / SHARED DECISION",
+      "title": "双方都喜欢，才进入看房",
+      "assets": ["me", "kayleePhoto", "livingWide"],
+      "action": "模拟双向喜欢",
+      "states": ["等待喜欢", "你已喜欢", "双方喜欢 · 可以预约看房"]
+    },
+    {
+      "id": 11,
+      "section": "功能设计",
+      "layout": "demo",
+      "eyebrow": "10 / HONG KONG DEMO",
+      "title": "香港 Demo：核心链路已可体验",
+      "badge": "静态前端 Demo",
+      "gallery": [
+        {"label": "测评", "asset": "quiz"},
+        {"label": "匹配", "asset": "kaylee"},
+        {"label": "共享房源", "asset": "rooms"},
+        {"label": "看房", "asset": "roomMatch"}
+      ]
+    },
+    {
+      "id": 12,
+      "section": "功能设计",
+      "layout": "localization",
+      "eyebrow": "11 / LOCALIZATION",
+      "title": "大陆版：同一链路，新增信任层",
+      "global": ["10 题测评", "滑动匹配", "共享房源", "消息与预约"],
+      "mainland": [
+        {"label": "性别偏好", "value": "同性 / 异性 / 随机"},
+        {"label": "实名与真人", "value": "替代路径"},
+        {"label": "职业与学历", "value": "徽章"},
+        {"label": "公开粒度", "value": "用户选择"},
+        {"label": "房源核验", "value": "发布者身份"}
+      ]
+    },
+    {
+      "id": 13,
+      "section": "功能设计",
+      "layout": "architecture",
+      "eyebrow": "12 / INFORMATION ARCHITECTURE",
+      "title": "四个标签，一条决策路径",
+      "tabs": [
+        {"id": "mates", "label": "室友", "features": ["生活测评", "偏好筛选", "双向匹配"]},
+        {"id": "rooms", "label": "房源", "features": ["共享卡组", "房源核验", "预约看房"]},
+        {"id": "chats", "label": "消息", "features": ["配对会话", "看房安排", "系统通知"]},
+        {"id": "me", "label": "我的", "features": ["认证徽章", "公开粒度", "推荐设置"]}
+      ]
+    },
+    {
+      "id": 14,
+      "section": "功能设计",
+      "layout": "verification",
+      "eyebrow": "13 / VERIFICATION",
+      "title": "认证可见，单位可以保密",
+      "badge": "77% 有限公开",
+      "verifications": ["实名", "真人", "职业", "学历"],
+      "disclosure": [
+        {"id": "badge", "label": "仅徽章", "value": 51, "display": "职业已认证"},
+        {"id": "area", "label": "城市 / 园区", "value": 26, "display": "深圳 · 南山"},
+        {"id": "full", "label": "完整单位", "value": 14, "display": "示例科技有限公司"}
+      ],
+      "info": "职业与学历由用户授权材料核验；真人认证提供非人脸替代路径，公开展示由用户选择。"
+    },
+    {
+      "id": 15,
+      "section": "实施路径",
+      "layout": "roadmap",
+      "eyebrow": "14 / ROADMAP",
+      "title": "大陆 MVP：先完成信任链路",
+      "phases": [
+        {"period": "0–3 个月", "label": "P0", "items": ["性别偏好", "实名核验", "房源核验", "非人脸替代"]},
+        {"period": "3–6 个月", "label": "P1", "items": ["职业 / 学历", "公开粒度", "推荐规则公示", "关闭个性化"]},
+        {"period": "6–12 个月", "label": "P2", "items": ["共同决策数据", "保障服务", "城市扩展"]}
+      ],
+      "guardrail": "平台不经手租金与押金"
+    },
+    {
+      "id": 16,
+      "section": "商业模式",
+      "layout": "business",
+      "eyebrow": "15 / BUSINESS MODEL",
+      "title": "核心匹配免费，成交与保障服务收费",
+      "badge": "模拟样本",
+      "models": [
+        {"value": "¥0", "label": "核心匹配"},
+        {"value": "2%", "label": "成交服务费假设"},
+        {"value": "按需", "label": "签约 / 押金保障"}
+      ],
+      "payment": {"value": 40, "label": "仅接受免费"},
+      "info": "2% 为原香港路演假设，最多 6 个月；中国大陆需另行完成合规与支付验证，平台不经手租金押金。"
+    },
+    {
+      "id": 17,
+      "section": "衡量指标",
+      "layout": "northstar",
+      "eyebrow": "16 / NORTH STAR",
+      "title": "北极星：共同喜欢并完成看房",
+      "funnel": ["双向配对", "共同刷房", "共同喜欢", "完成看房"],
+      "metrics": ["配对 → 共同刷房率", "共同喜欢 → 看房率", "有效看房率", "虚假信息率"]
+    },
+    {
+      "id": 18,
+      "section": "结束",
+      "layout": "closing",
+      "title": "谢谢。",
+      "brand": "roomix",
+      "subtitle": "中国大陆上线前产品路演",
+      "asset": "closingRoom",
+      "actions": [
+        {"label": "回到第 1 页", "target": 1, "primary": true},
+        {"label": "查看产品流程", "target": 8}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,615 @@
+@font-face {
+  font-family: 'Bricolage';
+  src: url('fonts/bricolage.woff2') format('woff2');
+  font-weight: 200 800;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  overflow: hidden;
+  background: #0f0b10;
+}
+
+body {
+  font-family: 'Bricolage', 'Segoe UI', sans-serif;
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+}
+
+#stage {
+  position: relative;
+  overflow: hidden;
+  background: #0f0b10;
+}
+body.h #stage {
+  width: 1920px;
+  height: 1080px;
+}
+body.v #stage {
+  width: 1080px;
+  height: 1920px;
+}
+
+.glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  opacity: 0.55;
+}
+.glow-a {
+  width: 900px;
+  height: 900px;
+  background: #ff4f6d;
+}
+.glow-b {
+  width: 800px;
+  height: 800px;
+  background: #ff9a3d;
+  opacity: 0.35;
+}
+
+/* ───── phone ───── */
+#phone {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 418px;
+  height: 872px;
+  transform-origin: 50% 50%;
+}
+.bezel {
+  position: absolute;
+  inset: 0;
+  border-radius: 64px;
+  background: #050506;
+  box-shadow: 0 0 0 2px #3a3b40, 0 50px 120px rgba(0, 0, 0, 0.6), 0 0 160px rgba(255, 79, 109, 0.18);
+}
+.screen {
+  position: absolute;
+  left: 14px;
+  top: 14px;
+  width: 390px;
+  height: 844px;
+  border-radius: 50px;
+  overflow: hidden;
+  background: #fff;
+}
+.screen iframe {
+  width: 390px;
+  height: 844px;
+  border: 0;
+  display: block;
+}
+.island {
+  position: absolute;
+  left: 50%;
+  top: 25px;
+  width: 116px;
+  height: 33px;
+  margin-left: -58px;
+  border-radius: 20px;
+  background: #000;
+}
+.statusbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 30px 0 40px;
+  font-family: 'Segoe UI', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000;
+}
+.statusbar .icons {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.homebar {
+  position: absolute;
+  left: 50%;
+  bottom: 8px;
+  width: 136px;
+  height: 5px;
+  margin-left: -68px;
+  border-radius: 3px;
+  background: #000;
+}
+.dark .statusbar {
+  color: #fff;
+}
+.dark .homebar {
+  background: #fff;
+}
+
+/* ───── captions ───── */
+.block {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+body.h .block.side {
+  left: 150px;
+  top: 0;
+  width: 860px;
+  height: 1080px;
+}
+body.h .block.center {
+  left: 160px;
+  right: 160px;
+  top: 0;
+  height: 1080px;
+  align-items: center;
+  text-align: center;
+}
+body.v .block.side {
+  left: 70px;
+  right: 70px;
+  top: 90px;
+  height: 380px;
+  align-items: center;
+  text-align: center;
+}
+body.v .block.center {
+  left: 70px;
+  right: 70px;
+  top: 0;
+  height: 1920px;
+  align-items: center;
+  text-align: center;
+}
+body.h .block.top {
+  left: 160px;
+  right: 160px;
+  top: 150px;
+  align-items: center;
+  text-align: center;
+}
+body.v .block.top {
+  left: 70px;
+  right: 70px;
+  top: 330px;
+  align-items: center;
+  text-align: center;
+}
+
+.line {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  margin: 0.08em 0;
+}
+.line.s-xl {
+  font-size: 104px;
+}
+.line.s-l {
+  font-size: 78px;
+}
+.line.s-m {
+  font-size: 48px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.82);
+}
+.line.s-s {
+  font-size: 34px;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: rgba(255, 255, 255, 0.7);
+}
+body.v .side .line.s-l {
+  font-size: 66px;
+}
+body.v .side .line.s-m {
+  font-size: 40px;
+}
+body.v .center .line.s-l {
+  font-size: 74px;
+}
+.line.gap {
+  margin-top: 0.5em;
+}
+.w {
+  display: inline-block;
+  white-space: pre;
+}
+.acc {
+  background: linear-gradient(90deg, #ff5c78, #ffa24a);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  padding-bottom: 0.08em;
+}
+.num {
+  display: inline-grid;
+  place-items: center;
+  width: 1.15em;
+  height: 1.15em;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff4f6d, #ff9a3d);
+  color: #fff;
+  font-size: 0.72em;
+  vertical-align: 0.12em;
+  margin-right: 0.3em;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  margin-top: 18px;
+  padding: 20px 30px 20px 22px;
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.09);
+  font-size: 38px;
+  font-weight: 600;
+  text-align: left;
+  width: 1120px;
+}
+body.v .item {
+  width: 940px;
+  font-size: 40px;
+}
+body.v .center .line.s-m {
+  font-size: 52px;
+}
+body.v .addon {
+  font-size: 54px;
+  padding: 40px 38px;
+}
+.item .ic {
+  flex-shrink: 0;
+  width: 70px;
+  height: 70px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  font-size: 38px;
+  background: rgba(255, 79, 109, 0.18);
+}
+
+/* ───── chat visual ───── */
+.chat {
+  position: absolute;
+  width: 600px;
+  border-radius: 34px;
+  background: #1c171e;
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.08), 0 40px 100px rgba(0, 0, 0, 0.5);
+  padding: 0 0 26px;
+  overflow: hidden;
+}
+body.h .chat {
+  left: 1110px;
+  top: 170px;
+}
+body.v .chat {
+  left: 140px;
+  top: 560px;
+  width: 800px;
+}
+.chat-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 26px;
+  background: rgba(255, 255, 255, 0.05);
+  font-size: 26px;
+  font-weight: 700;
+}
+.chat-head small {
+  display: block;
+  font-size: 19px;
+  font-weight: 500;
+  opacity: 0.55;
+}
+.chat-ava {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 30px;
+  background: #2c2530;
+}
+.chat-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 22px 24px 0;
+}
+.msg {
+  max-width: 82%;
+  padding: 14px 20px;
+  border-radius: 24px;
+  border-bottom-left-radius: 8px;
+  background: #2c2530;
+  font-size: 25px;
+  font-weight: 500;
+  line-height: 1.3;
+  align-self: flex-start;
+  transform-origin: 0% 100%;
+}
+body.v .msg {
+  font-size: 30px;
+}
+.msg b {
+  display: block;
+  font-size: 19px;
+  margin-bottom: 2px;
+}
+.msg.me {
+  align-self: flex-end;
+  background: linear-gradient(135deg, #ff4f6d, #ff8a45);
+  border-bottom-left-radius: 24px;
+  border-bottom-right-radius: 8px;
+  transform-origin: 100% 100%;
+}
+.msg.warn {
+  background: #3a2a1c;
+  box-shadow: inset 0 0 0 2px rgba(255, 162, 74, 0.6);
+}
+
+/* ───── logo ───── */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.logo svg {
+  width: 120px;
+  height: 120px;
+}
+.logo span {
+  font-size: 150px;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+/* ───── unify visual ───── */
+.unify {
+  position: absolute;
+  width: 0;
+  height: 0;
+}
+body.h .unify {
+  left: 960px;
+  top: 690px;
+}
+body.v .unify {
+  left: 540px;
+  top: 1230px;
+}
+.tile {
+  position: absolute;
+  width: 250px;
+  height: 320px;
+  margin: -160px 0 0 -125px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.5);
+}
+.tile-ad {
+  background: #f3efe4;
+  color: #222;
+  font-family: 'Courier New', monospace;
+  font-size: 21px;
+  padding: 20px;
+  line-height: 1.35;
+}
+.tile-ad b {
+  display: block;
+  font-size: 30px;
+  margin-bottom: 8px;
+  font-family: Georgia, serif;
+}
+.tile-sheet {
+  background: #fff;
+  color: #333;
+  font-family: Arial, sans-serif;
+  font-size: 15px;
+}
+.tile-sheet div {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid #ddd;
+}
+.tile-sheet span {
+  padding: 9px 6px;
+  border-right: 1px solid #ddd;
+}
+.tile-sheet div:first-child {
+  background: #1f7a43;
+  color: #fff;
+  font-weight: 700;
+}
+.tile-photo {
+  background-size: cover;
+  background-position: center;
+}
+.tile-photo i {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 44px;
+  color: rgba(255, 255, 255, 0.6);
+  transform: rotate(-24deg);
+  letter-spacing: 4px;
+  font-family: Arial, sans-serif;
+}
+.tile-photo em {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #ffe600;
+  color: #c00;
+  font-style: normal;
+  font-weight: 900;
+  font-size: 26px;
+  text-align: center;
+  padding: 8px;
+  font-family: Arial, sans-serif;
+}
+.rcard {
+  position: absolute;
+  width: 330px;
+  height: 440px;
+  margin: -220px 0 0 -165px;
+  border-radius: 24px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55), 0 0 0 4px #fff;
+}
+.rcard::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(0, 0, 0, 0.85));
+}
+.rcard div {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 20px;
+  z-index: 1;
+}
+.rcard b {
+  display: block;
+  font-size: 38px;
+}
+.rcard small {
+  display: block;
+  font-size: 21px;
+  opacity: 0.9;
+  font-weight: 600;
+}
+.rcard span {
+  display: inline-block;
+  margin-top: 10px;
+  font-size: 18px;
+  font-weight: 700;
+  padding: 6px 13px;
+  border-radius: 999px;
+  background: rgba(255, 79, 109, 0.35);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 140, 160, 0.9);
+}
+
+/* ───── add-ons ───── */
+.addons {
+  position: absolute;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 26px;
+}
+body.h .addons {
+  left: 460px;
+  width: 1000px;
+  top: 470px;
+}
+body.v .addons {
+  left: 90px;
+  width: 900px;
+  top: 900px;
+}
+.addon {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 30px 34px;
+  border-radius: 30px;
+  background: rgba(255, 255, 255, 0.07);
+  box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.1);
+  font-size: 46px;
+  font-weight: 700;
+}
+.addon i {
+  font-style: normal;
+  font-size: 54px;
+}
+
+/* ───── end card ───── */
+.wipe {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #ff4f6d, #ff7a4a 55%, #ff9a3d);
+}
+.endcard {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.endcard .tag {
+  font-size: 58px;
+  font-weight: 700;
+  margin-top: 40px;
+  line-height: 1.2;
+}
+body.v .endcard .tag {
+  font-size: 54px;
+}
+.endcard .url {
+  margin-top: 46px;
+  font-size: 32px;
+  font-weight: 700;
+  padding: 16px 34px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.45);
+}
+
+/* ───── pointer ───── */
+#pointer {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 58px;
+  height: 58px;
+  margin: -29px 0 0 -29px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.38);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.9), 0 6px 20px rgba(0, 0, 0, 0.35);
+  opacity: 0;
+  z-index: 50;
+}
+
+#fade {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  z-index: 60;
+}
+
+/* overlays never intercept the input we send to the app */
+#layer,
+#layer *,
+#pointer,
+#fade,
+.statusbar,
+.homebar,
+.island {
+  pointer-events: none;
+}
