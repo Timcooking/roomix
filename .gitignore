@@ -1,0 +1,9 @@
+node_modules
+dist
+.wrangler
+.tmp-photos
+tsconfig.tsbuildinfo
+__pycache__/
+*.pyc
+photos-src/.cache
+video/out
